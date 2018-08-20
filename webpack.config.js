@@ -1,20 +1,32 @@
 const path = require('path');
-
-const PATHS = {
-  source: path.join(__dirname, 'source'),
-  build: path.join(__dirname, 'build')
-};
+const ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 module.exports = {
-  entry: "./src/index.js",
+  entry: './src/app.js',
   output: {
-    path: PATHS.build,
-    filename: "[name].js"
+    path: path.resolve(__dirname, 'dist'),
+    filename: 'bundle.js'
   },
   devServer: {
     open: true,
-    contentBase: PATHS,
+    contentBase: "./dist",
     compress: true,
-    port: 9000
+    port: 8888
+  },
+  module: {
+    rules: [
+      {
+        test: /\.scss$/,
+        use: [
+          "style-loader",
+          "css-loader",
+          "sass-loader"
+        ]
+      },
+      {
+        test: /\.(png|jpg|svg|jpeg)$/,
+        loader: 'url-loader'
+      }
+    ]
   }
 };

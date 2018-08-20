@@ -1,3 +1,5 @@
+import "./styles/index.scss";
+
 class Main {
   constructor() {
     this.data = 'Hello everyone!';
